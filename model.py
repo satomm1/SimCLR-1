@@ -26,6 +26,7 @@ class Model(nn.Module):
         out = self.g(feature)
         return F.normalize(feature, dim=-1), F.normalize(out, dim=-1)
 
+
 class MyModel(nn.Module):
     def __init__(self, feature_dim=128):
         super(MyModel, self).__init__()
