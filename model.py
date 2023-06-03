@@ -25,3 +25,14 @@ class Model(nn.Module):
         feature = torch.flatten(x, start_dim=1)
         out = self.g(feature)
         return F.normalize(feature, dim=-1), F.normalize(out, dim=-1)
+
+class MyModel(nn.Module):
+    def __init__(self, feature_dim=128):
+        super(MyModel, self).__init__()
+        self.ResNetModel = resnet50()
+        self.ResNetModel.fc = nn.Sequential(nn.Flatten(start_dim=1), nn.Linear(2048, 512, bias=False), nn.BatchNorm1d(
+            512), nn.ReLU(inplace=True), nn.Linear(512, feature_dim, bias=True))
+
+    def forward(self, x):
+        x = self.ResNetModel(x)
+        return F.normalize(x, dim=-1)

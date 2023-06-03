@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 import utils
-from model import Model
+from model import Model, MyModel
 
 
 # train for one epoch to learn unique features
@@ -17,8 +17,10 @@ def train(net, data_loader, train_optimizer):
     total_loss, total_num, train_bar = 0.0, 0, tqdm(data_loader)
     for pos_1, pos_2 in train_bar:
         pos_1, pos_2 = pos_1.cuda(non_blocking=True), pos_2.cuda(non_blocking=True)
-        feature_1, out_1 = net(pos_1)
-        feature_2, out_2 = net(pos_2)
+        # feature_1, out_1 = net(pos_1)
+        # feature_2, out_2 = net(pos_2)
+        out_1 = net(pos_1)
+        out_2 = net(pos_2)
         # [2*B, D]
         out = torch.cat([out_1, out_2], dim=0)
         # [2*B, 2*B]
@@ -110,7 +112,8 @@ if __name__ == '__main__':
                               drop_last=True)
 
     # model setup and optimizer config
-    model = Model(feature_dim).cuda()
+    # model = Model(feature_dim).cuda()
+    model = MyModel().cuda()
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
 
     # training loop
