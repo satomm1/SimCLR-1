@@ -3,6 +3,7 @@ import os
 
 import pandas as pd
 import torch
+import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from tqdm import tqdm
@@ -113,7 +114,9 @@ if __name__ == '__main__':
 
     # model setup and optimizer config
     # model = Model(feature_dim).cuda()
-    model = Model().cuda()
+    model = Model(feature_dim).cuda()
+    model.f[0] = nn.Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    model = model.cuda()
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-6)
 
     # training loop
