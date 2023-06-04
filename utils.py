@@ -58,6 +58,9 @@ class MeltpoolDataset(Dataset):
             pos_1 = self.transform(image)
             pos_2 = self.transform(image)
 
+        if self.transform == test_transform:
+            return pos_1, pos_2, img_name
+
         return pos_1, pos_2
 
 
