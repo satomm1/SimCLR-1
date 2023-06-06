@@ -152,7 +152,7 @@ if __name__ == '__main__':
     dataloaders['test'] = DataLoader(test_data, batch_size=batch_size, shuffle=True, num_workers=0, pin_memory=True,
                                      drop_last=True)
 
-    for phase in ['train', 'val', 'test']:
+    for phase in ['test', 'val', 'train']:
         meltpool_dataloader = dataloaders[phase]
 
         num_images = meltpool_dataloader.__len__()
