@@ -1,3 +1,6 @@
+Modified by Matthew Sato 06/07/2023 to use on laser powder bed fusion melt pool data.
+
+
 # SimCLR
 A PyTorch implementation of SimCLR based on ICML 2020 paper [A Simple Framework for Contrastive Learning of Visual Representations](https://arxiv.org/abs/2002.05709).
 
